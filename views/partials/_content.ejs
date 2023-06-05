@@ -1,0 +1,70 @@
+<div
+class=" w-2/3 h-3/4 rounded-lg bg-white shadow-md flex-col justify-center p-8 ml-16 "
+>
+<div class="w-full h-30 items-center flex p-6 justify-center">
+  <form class="content-around w-full h-full justify-center">
+    <input
+      name="search"
+      placeholder="Enter job title "
+      class="rounded-lg w-3/4 h-full p-4 border-2  transition-colors ease-in-out duration-100 focus:border-indigo-600  outline-none hover:border-indigo-600"
+      onkeyup="searchBox(this)"
+      />
+    <button class="bg-indigo-600 p-4 rounded-md w-1/5 ml-5">
+      <div>
+        <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
+        <label class="text-white  ml-3 text-lg">Search</label>
+      </div>
+    </button>
+    </form>
+</div>
+<div class="w-full h-3/4 mt-10">
+  <table class="w-full text-center table">
+    <thead>
+      <tr
+        class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal"
+      >
+        <th class="py-3 px-6">Job Title</th>
+        <th class="py-3 px-6">Job Description</th>
+        <th class="py-3 px-6">Job Priority</th>
+        <th class="py-3 px-6">Job Operation</th>
+      </tr>
+    </thead>
+    <tbody class="text-gray-600 text-sm font-light">
+      <% for(let i=0;i<job.length;i++) { %>
+      <tr class="border-b border-gray-200 hover:bg-gray-100 text-base">
+        <td class="py-3 px-6"><%= job[i].job_title %></td>
+        <td class="py-3 px-6"><%= job[i].job_description %></td>
+          <% switch(job[i].job_priority
+          ) {
+            case 0 : %>
+            <td class="py-3 px-6 bg-blue-500 text-white">Low</td>
+            <% break;
+            case 5 : %>
+            <td class="py-3 px-6 bg-green-400 text-white">Medium</td>
+            <% break;
+            case 10 : %>
+            <td class="py-3 px-6 bg-red-500 text-white">High</td>
+            <% break;
+            }
+            %>
+       
+        <td class="py-3 px-6">
+          <div>
+            <form action="/<%=job[i]._id%>?_method=DELETE" method="POST">
+              <button class="w-10 h-10" id="deleteBtn" id="<%=job[i].id%>">
+                <i
+                  class="fa-solid fa-trash fa-lg"
+                  style="color: #d10000"
+                ></i>
+              </button>
+            </form>
+
+          </div>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+</div>
+
